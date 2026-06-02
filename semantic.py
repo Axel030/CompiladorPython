@@ -1,6 +1,6 @@
+#semantic.py
 from parser import Declaracion, Asignacion, Imprimir, Si, Mientras, Literal, Variable, Binaria
 from token_type import TokenType
-
 
 class ErrorSemantico:
     def __init__(self, mensaje, linea, columna):

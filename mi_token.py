@@ -1,3 +1,4 @@
+# mi_token.py
 class Token:
     def __init__(self, tipo, valor, linea, columna):
         self.tipo = tipo

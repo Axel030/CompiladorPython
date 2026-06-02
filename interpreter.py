@@ -1,4 +1,5 @@
-from parser import Declaracion, Asignacion, Imprimir, Si, Mientras, Literal, Variable, Binaria
+##interpreter.py
+from parser import Declaracion, Asignacion, Imprimir, Si, Mientras, Para, Literal, Variable, Binaria
 from token_type import TokenType
 
 
@@ -38,6 +39,21 @@ class Interpreter:
             while self.evaluar(sentencia.condicion):
                 for s in sentencia.cuerpo:
                     self.ejecutar_sentencia(s)
+
+                contador_seguridad += 1
+
+                if contador_seguridad > 1000:
+                    self.salida.append("Error: posible ciclo infinito detenido")
+                    break
+        elif isinstance(sentencia, Para):
+            self.ejecutar_sentencia(sentencia.inicializacion)
+            contador_seguridad = 0
+
+            while self.evaluar(sentencia.condicion):
+                for s in sentencia.cuerpo:
+                    self.ejecutar_sentencia(s)
+
+                self.ejecutar_sentencia(sentencia.incremento)
 
                 contador_seguridad += 1
 

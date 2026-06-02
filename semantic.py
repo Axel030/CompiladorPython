@@ -1,5 +1,5 @@
 #semantic.py
-from parser import Declaracion, Asignacion, Imprimir, Si, Mientras, Literal, Variable, Binaria
+from parser import Declaracion, Asignacion, Imprimir, Si, Mientras, Para, Literal, Variable, Binaria
 from token_type import TokenType
 
 class ErrorSemantico:
@@ -58,6 +58,22 @@ class SemanticAnalyzer:
                     0,
                     0
                 ))
+
+            for s in sentencia.cuerpo:
+                self.analizar_sentencia(s)
+
+        elif isinstance(sentencia, Para):
+            self.analizar_sentencia(sentencia.inicializacion)
+            tipo_condicion = self.obtener_tipo(sentencia.condicion)
+
+            if tipo_condicion != "bool":
+                self.errores.append(ErrorSemantico(
+                    "La condición del for debe ser booleana",
+                    0,
+                    0
+                ))
+
+            self.analizar_sentencia(sentencia.incremento)
 
             for s in sentencia.cuerpo:
                 self.analizar_sentencia(s)

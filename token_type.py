@@ -40,3 +40,4 @@ class TokenType(Enum):
 
     FIN_SENTENCIA = auto()
     EOF = auto()
+    FOR = auto()

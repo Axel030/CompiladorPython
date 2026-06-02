@@ -1,3 +1,4 @@
+# parser.py
 from token_type import TokenType
 
 
@@ -61,6 +62,13 @@ class Mientras:
     def __init__(self, condicion, cuerpo):
         self.condicion = condicion
         self.cuerpo = cuerpo
+        
+class Para:
+    def __init__(self, inicializacion, condicion, incremento, cuerpo):
+        self.inicializacion = inicializacion
+        self.condicion = condicion
+        self.incremento = incremento
+        self.cuerpo = cuerpo
 
 
 class Parser:
@@ -96,6 +104,9 @@ class Parser:
 
         if self.coincide(TokenType.WHILE):
             return self.sentencia_mientras()
+        
+        if self.coincide(TokenType.FOR):
+            return self.sentencia_for()
 
         self.error("Sentencia no reconocida", self.actual())
         return None
@@ -122,6 +133,12 @@ class Parser:
         expresion = self.expresion()
         self.consumir(TokenType.FIN_SENTENCIA, "Se esperaba ';;' al final de la asignación")
 
+        return Asignacion(nombre.valor, expresion, nombre)
+    
+    def asignacion_sin_fin_sentencia(self):
+        nombre = self.avanzar()
+        self.consumir(TokenType.ASIGNACION, "Se esperaba '=' en el incremento del for")
+        expresion = self.expresion()
         return Asignacion(nombre.valor, expresion, nombre)
 
     def imprimir(self):
@@ -214,6 +231,24 @@ class Parser:
             expr = Binaria(expr, operador, derecha)
 
         return expr
+    
+    def sentencia_for(self):
+        self.avanzar()
+        self.consumir(TokenType.PARENTESIS_ABRE, "Se esperaba '(' después de for")
+        inicializacion = None
+
+        if self.es_tipo_dato():
+            inicializacion = self.declaracion()
+        elif self.coincide(TokenType.IDENTIFICADOR):
+            inicializacion = self.asignacion()
+        else:
+            self.error("Se esperaba una inicialización dentro del for", self.actual())
+        condicion = self.expresion()
+        self.consumir(TokenType.FIN_SENTENCIA, "Se esperaba ';;' después de la condición del for")
+        incremento = self.asignacion_sin_fin_sentencia()
+        self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' después del for")
+        cuerpo = self.bloque()
+        return Para(inicializacion, condicion, incremento, cuerpo)
 
     def factor(self):
         expr = self.primario()

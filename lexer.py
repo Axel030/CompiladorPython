@@ -13,6 +13,7 @@ PALABRAS_RESERVADAS = {
     "print": TokenType.PRINT,
     "true": TokenType.TRUE,
     "false": TokenType.FALSE,
+    "for": TokenType.FOR
 }
 
 class Lexer:

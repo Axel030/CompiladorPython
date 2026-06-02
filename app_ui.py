@@ -195,6 +195,9 @@ while (a1 < 5) {
     print(a1);;
     a1 = a1 + 1;;
 }
+for (int i = 0;; i < 5;; i = i + 1) {
+    print(i);;
+}
 '''
         self.txtCodigo.insert("1.0", codigo)
 

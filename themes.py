@@ -1,3 +1,4 @@
+# themes.py
 def aplicar_tema_claro(app):
     app.btnTema.config(text="Modo oscuro")
 

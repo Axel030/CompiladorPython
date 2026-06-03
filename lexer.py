@@ -1,4 +1,3 @@
-# lexer.py
 from token_type import TokenType
 from mi_token import Token
 
@@ -85,7 +84,7 @@ class Lexer:
                     self.avanzar()
                     self.agregar_token(TokenType.DIFERENTE, "!=", linea, columna)
                 else:
-                    self.errores.append(f"Símbolo inválido '!' en L{linea}, C{columna}")
+                    self.errores.append(f"Simbolo invalido '!' en L{linea}, C{columna}")
                 continue
 
             if c == ">":
@@ -122,7 +121,7 @@ class Lexer:
                 self.agregar_token(simples[c], c, linea, columna)
                 continue
 
-            self.errores.append(f"Símbolo no válido '{c}' en L{linea}, C{columna}")
+            self.errores.append(f"Símbolo no valido '{c}' en L{linea}, C{columna}")
             self.avanzar()
 
         self.tokens.append(Token(TokenType.EOF, "", self.linea, self.columna))

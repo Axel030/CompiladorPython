@@ -231,20 +231,20 @@ for (int i = 0;; i < 5;; i = i + 1) {
             self.txtSalida.insert(tk.END, "ERRORES ENCONTRADOS:\n\n", "titulo")
 
             if errores_lexicos:
-                self.txtSalida.insert(tk.END, "Errores Léxicos:\n", "titulo")
+                self.txtSalida.insert(tk.END, "Errores Lexicos:\n", "titulo")
                 for error in errores_lexicos:
                     self.txtSalida.insert(tk.END, f"- {error}\n", "lexico")
                 self.txtSalida.insert(tk.END, "\n")
 
             if errores_sintacticos:
-                self.txtSalida.insert(tk.END, "Errores Sintácticos:\n", "titulo")
+                self.txtSalida.insert(tk.END, "Errores Sintacticos:\n", "titulo")
                 for error in errores_sintacticos:
                     self.txtSalida.insert(tk.END, f"- {error}\n", "sintactico")
                     self.marcar_linea_error(error.linea, "sintactico")
                 self.txtSalida.insert(tk.END, "\n")
 
             if errores_semanticos:
-                self.txtSalida.insert(tk.END, "Errores Semánticos:\n", "titulo")
+                self.txtSalida.insert(tk.END, "Errores Semanticos:\n", "titulo")
                 for error in errores_semanticos:
                     self.txtSalida.insert(tk.END, f"- {error}\n", "semantico")
                     self.marcar_linea_error(error.linea, "semantico")
@@ -252,10 +252,10 @@ for (int i = 0;; i < 5;; i = i + 1) {
 
             return
 
-        self.txtSalida.insert(tk.END, "EJECUCIÓN CORRECTA:\n\n", "correcto")
+        self.txtSalida.insert(tk.END, "EJECUCION CORRECTA:\n\n", "correcto")
         self.txtSalida.insert(
             tk.END,
-            salida if salida.strip() else "El programa no imprimió ningún resultado."
+            salida if salida.strip() else "El programa no imprimio ningún resultado."
         )
 
     def actualizar_numeros_linea(self, event=None):

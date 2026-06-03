@@ -1,4 +1,3 @@
-# parser.py
 from token_type import TokenType
 
 
@@ -115,9 +114,9 @@ class Parser:
         tipo_token = self.avanzar()
         nombre = self.consumir(TokenType.IDENTIFICADOR, "Se esperaba un identificador")
 
-        self.consumir(TokenType.ASIGNACION, "Se esperaba '=' en la declaración")
+        self.consumir(TokenType.ASIGNACION, "Se esperaba '=' en la declaracion")
         expresion = self.expresion()
-        self.consumir(TokenType.FIN_SENTENCIA, "Se esperaba ';;' al final de la declaración")
+        self.consumir(TokenType.FIN_SENTENCIA, "Se esperaba ';;' al final de la declaracion")
 
         return Declaracion(
             tipo_token.valor,
@@ -129,9 +128,9 @@ class Parser:
     def asignacion(self):
         nombre = self.avanzar()
 
-        self.consumir(TokenType.ASIGNACION, "Se esperaba '=' en la asignación")
+        self.consumir(TokenType.ASIGNACION, "Se esperaba '=' en la asignacion")
         expresion = self.expresion()
-        self.consumir(TokenType.FIN_SENTENCIA, "Se esperaba ';;' al final de la asignación")
+        self.consumir(TokenType.FIN_SENTENCIA, "Se esperaba ';;' al final de la asignacion")
 
         return Asignacion(nombre.valor, expresion, nombre)
     
@@ -144,19 +143,19 @@ class Parser:
     def imprimir(self):
         self.avanzar()
 
-        self.consumir(TokenType.PARENTESIS_ABRE, "Se esperaba '(' después de imprimir")
+        self.consumir(TokenType.PARENTESIS_ABRE, "Se esperaba '(' despues de imprimir")
         expresion = self.expresion()
-        self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' después de imprimir")
-        self.consumir(TokenType.FIN_SENTENCIA, "Se esperaba ';;' después de imprimir")
+        self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' despues de imprimir")
+        self.consumir(TokenType.FIN_SENTENCIA, "Se esperaba ';;' despues de imprimir")
 
         return Imprimir(expresion)
 
     def sentencia_si(self):
         self.avanzar()
 
-        self.consumir(TokenType.PARENTESIS_ABRE, "Se esperaba '(' después de si")
+        self.consumir(TokenType.PARENTESIS_ABRE, "Se esperaba '(' despues de si")
         condicion = self.expresion()
-        self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' después de la condición")
+        self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' despues de la condicion")
 
         cuerpo = self.bloque()
         cuerpo_sino = []
@@ -170,9 +169,9 @@ class Parser:
     def sentencia_mientras(self):
         self.avanzar()
 
-        self.consumir(TokenType.PARENTESIS_ABRE, "Se esperaba '(' después de mientras")
+        self.consumir(TokenType.PARENTESIS_ABRE, "Se esperaba '(' despues de mientras")
         condicion = self.expresion()
-        self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' después de la condición")
+        self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' despues de la condicion")
 
         cuerpo = self.bloque()
 
@@ -234,7 +233,7 @@ class Parser:
     
     def sentencia_for(self):
         self.avanzar()
-        self.consumir(TokenType.PARENTESIS_ABRE, "Se esperaba '(' después de for")
+        self.consumir(TokenType.PARENTESIS_ABRE, "Se esperaba '(' despues de for")
         inicializacion = None
 
         if self.es_tipo_dato():
@@ -242,11 +241,11 @@ class Parser:
         elif self.coincide(TokenType.IDENTIFICADOR):
             inicializacion = self.asignacion()
         else:
-            self.error("Se esperaba una inicialización dentro del for", self.actual())
+            self.error("Se esperaba una inicializacion dentro del for", self.actual())
         condicion = self.expresion()
-        self.consumir(TokenType.FIN_SENTENCIA, "Se esperaba ';;' después de la condición del for")
+        self.consumir(TokenType.FIN_SENTENCIA, "Se esperaba ';;' despues de la condicion del for")
         incremento = self.asignacion_sin_fin_sentencia()
-        self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' después del for")
+        self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' despues del for")
         cuerpo = self.bloque()
         return Para(inicializacion, condicion, incremento, cuerpo)
 
@@ -290,10 +289,10 @@ class Parser:
         if self.coincide(TokenType.PARENTESIS_ABRE):
             self.avanzar()
             expr = self.expresion()
-            self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' después de la expresión")
+            self.consumir(TokenType.PARENTESIS_CIERRA, "Se esperaba ')' despues de la expresion")
             return expr
 
-        self.error("Se esperaba una expresión válida", token)
+        self.error("Se esperaba una expresion válida", token)
         self.avanzar()
         return Literal(None, "desconocido")
 

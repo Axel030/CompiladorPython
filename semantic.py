@@ -38,7 +38,7 @@ class SemanticAnalyzer:
 
             if tipo_condicion != "bool":
                 self.errores.append(ErrorSemantico(
-                    "La condición del si debe ser booleana",
+                    "La condicion del si debe ser booleana",
                     0,
                     0
                 ))
@@ -54,7 +54,7 @@ class SemanticAnalyzer:
 
             if tipo_condicion != "bool":
                 self.errores.append(ErrorSemantico(
-                    "La condición del mientras debe ser booleana",
+                    "La condicion del mientras debe ser booleana",
                     0,
                     0
                 ))
@@ -68,7 +68,7 @@ class SemanticAnalyzer:
 
             if tipo_condicion != "bool":
                 self.errores.append(ErrorSemantico(
-                    "La condición del for debe ser booleana",
+                    "La condicion del for debe ser booleana",
                     0,
                     0
                 ))
@@ -156,7 +156,7 @@ class SemanticAnalyzer:
                 return "int"
 
             self.errores.append(ErrorSemantico(
-                f"Operación inválida entre '{tipo_izq}' y '{tipo_der}'",
+                f"Operacion invalida entre '{tipo_izq}' y '{tipo_der}'",
                 expr.operador.linea,
                 expr.operador.columna
             ))

@@ -1,4 +1,3 @@
-##interpreter.py
 from parser import Declaracion, Asignacion, Imprimir, Si, Mientras, Para, Literal, Variable, Binaria
 from token_type import TokenType
 

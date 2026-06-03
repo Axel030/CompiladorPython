@@ -1,4 +1,3 @@
-# token_type.py
 from enum import Enum, auto
 
 class TokenType(Enum):
@@ -14,6 +13,8 @@ class TokenType(Enum):
 
     TRUE = auto()
     FALSE = auto()
+
+    FOR = auto()
 
     IDENTIFICADOR = auto()
     NUMERO_ENTERO = auto()
@@ -40,4 +41,4 @@ class TokenType(Enum):
 
     FIN_SENTENCIA = auto()
     EOF = auto()
-    FOR = auto()
+    

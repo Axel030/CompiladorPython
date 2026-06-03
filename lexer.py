@@ -62,6 +62,9 @@ class Lexer:
             if c == '"':
                 self.cadena(linea, columna)
                 continue
+            if c == "/" and self.ver_siguiente() == "/":
+                self.comentario_linea()
+                continue
 
             if c == ";" and self.ver_siguiente() == ";":
                 self.avanzar()
@@ -173,3 +176,7 @@ class Lexer:
         valor = self.codigo[inicio:self.pos]
         self.avanzar()
         self.agregar_token(TokenType.TEXTO, valor, linea, columna)
+
+    def comentario_linea(self):
+        while self.actual() != "\n" and self.actual() != "\0":
+            self.avanzar()

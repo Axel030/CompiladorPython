@@ -21,7 +21,8 @@ class AppCompilador:
         self.cargar_ejemplo()
         self.actualizar_numeros_linea()
         aplicar_tema_claro(self)
-
+    
+    
     def crear_interfaz(self):
         self.style = ttk.Style()
         self.style.theme_use("clam")
